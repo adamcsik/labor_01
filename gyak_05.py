@@ -91,6 +91,21 @@ def beleptetes():
             break
     return ok_regisztracio
 
+def jelszo_generalasa(hossz, nagybetu, kisbetu, szam):
+    import string
+    import random
+    karakterek = ""
+    if nagybetu:
+        karakterek = karakterek + string.ascii_uppercase
+    if kisbetu:
+        karakterek = karakterek + string.ascii_lowercase
+    if szam:
+        karakterek = karakterek + string.digits
+    jelszo = ""
+    for _ in range(hossz):
+        jelszo = jelszo + karakterek[random.randint(0, len(karakterek)-1)]
+    return jelszo
+
 # Innen indul a program
 if __name__ == "__main__":
     if regisztracio():
