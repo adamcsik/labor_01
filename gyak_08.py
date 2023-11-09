@@ -51,7 +51,7 @@ def regisztracio_ablak():
         jsz2.set(jsz0)
 
 
-    regisztracio = Tk()
+    regisztracio = Toplevel()
     regisztracio.title("Regisztráció")
 
     reg_felh_cimke = Label(regisztracio, text="A felhasználó neve (email):")
@@ -84,11 +84,12 @@ def regisztracio_ablak():
     regisztracio.mainloop()
 
 
-fhsz = gyak_09.Felhasznalo("", "")
 #regisztracio_ablak()
 app = Tk()
 app.title("Dolgozók nyilvántartása")
 app.minsize(300, 200)
+fhsz = gyak_09.Felhasznalo("", "")
+
 menusor = Menu(app)
 
 hozzaferes = Menu(menusor)
