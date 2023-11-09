@@ -1,8 +1,8 @@
 class Jelszo:
     jelszo = ""
 
-    def __init__(self):
-        pass
+    def __init__(self, jelszo):
+        self.jelszo = jelszo
 
     def jelszo_bekerese(self):
         pass
@@ -26,6 +26,28 @@ class Jelszo:
         self.jelszo = jelszo
         return
 
-class Felhasznalo:
-    pass
+class Felhasznalo(Jelszo):
+    email = ""
+    def __init__(self, email, jelszo):
+        super().__init__(jelszo)
+        self.email = email
+
+"""fhsz = Felhasznalo()
+
+fhsz.jelszo
+fhsz.email
+fhsz.jelszo_generalasa()"""
+
+
+
+
+
+
+
+
+
+
+
+
+
 

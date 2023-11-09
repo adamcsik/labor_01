@@ -1,4 +1,5 @@
 from tkinter import *
+from  tkinter import messagebox
 import gyak_09
 def beleptetes_ablak():
     def ok_gomb_feldolgozasa():
@@ -33,11 +34,19 @@ def beleptetes_ablak():
 
 def regisztracio_ablak():
     def ok_gomb_kezelese():
-        regisztracio.destroy()
+        if reg_jelszo.get() != reg_jelszo2.get():
+            messagebox.showerror("Hiba", "Nem egyforma a két jelszó!")
+        elif " " in fhemail.get() or "@" not in fhemail.get() or "." not in fhemail.get():
+            messagebox.showerror("Hiba", "Nem megfelelő az email formátum!")
+        else:
+            fhsz.email = fhemail.get()
+            fhsz.jelszo = reg_jelszo.get()
+            print(fhsz.email)
+            print(fhsz.jelszo)
+            regisztracio.destroy()
     def jelszo_gen_gomb_kezelese():
-        pw = gyak_09.Jelszo()
-        pw.jelszo_generalasa(10, True, True, True)
-        jsz0 = pw.jelszo
+        fhsz.jelszo_generalasa(10, True, True, True)
+        jsz0 = fhsz.jelszo
         jsz.set(jsz0)
         jsz2.set(jsz0)
 
@@ -50,7 +59,9 @@ def regisztracio_ablak():
     reg_jelszo_cimke = Label(regisztracio, text="Jelszó:")
     reg_jelszo2_cimke = Label(regisztracio, text="Jelszó ismét:")
 
-    reg_felh = Entry(regisztracio, width=30)
+    fhemail = StringVar()
+    fhemail.set("")
+    reg_felh = Entry(regisztracio, textvariable=fhemail, width=30)
     jsz = StringVar()
     jsz.set("")
     jsz2 = StringVar()
@@ -72,5 +83,24 @@ def regisztracio_ablak():
 
     regisztracio.mainloop()
 
-#beleptetes_ablak()
-regisztracio_ablak()
+
+fhsz = gyak_09.Felhasznalo("", "")
+#regisztracio_ablak()
+app = Tk()
+app.title("Dolgozók nyilvántartása")
+app.minsize(300, 200)
+menusor = Menu(app)
+
+hozzaferes = Menu(menusor)
+hozzaferes.add_command(label="Belépés", command=app.destroy)
+hozzaferes.add_command(label="Regisztráció", command=regisztracio_ablak)
+hozzaferes.add_command(label="Kilépés", command=app.destroy)
+menusor.add_cascade(label="Hozzáférés", menu=hozzaferes)
+
+dolgozok = Menu(menusor)
+dolgozok.add_command(label="Lista", command=app.destroy)
+dolgozok.add_command(label="Névjegy", command=app.destroy)
+menusor.add_cascade(label="Dolgozók", menu=dolgozok)
+
+app.config(menu=menusor)
+app.mainloop()
